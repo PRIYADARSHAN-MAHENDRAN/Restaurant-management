@@ -3,6 +3,7 @@ public class Main
 {
 	 
 	static  String userPass[][]=new String[3][2];
+	static  String listDish[][]=new String[10][2];
     	public static void main(String[] args) {
         
 	    userPass[0][0]="MUTHU";
@@ -95,7 +96,45 @@ public class Main
 
 	}
 	static void MainMenu(){
-		System.out.println("mainmenu");
-
+		Scanner sc=new Scanner(System.in);
+		int Continuerun=1;
+		while(Continuerun==1){
+		System.out.println("1.List of dish");
+		System.out.println("2.Add dish");
+		System.out.println("3.Bill");
+		System.out.println("4.Total sells");
+		int choice=sc.nextInt();
+		
+		switch (choice) {
+			case 1:
+				for(int i=0;i<listDish.length;i++){
+					for(int j=0;j<2;j++){
+						System.out.print(listDish[i][j]+" ");
+					}
+					System.out.println();
+				}
+				break;
+			case 2:
+				System.out.println("Number dish to add");
+				int Tdish=sc.nextInt();
+				if(Tdish<listDish.length){
+				for(int i=0;i<Tdish;i++){
+					for(int j=0;j<2;j++){
+						if(j==0){
+							System.out.println("Dish name "+i+": ");
+						}
+						else{
+							System.out.println("Dish price "+i+": ");
+						}
+						listDish[i][j]=sc.next();
+					}
+				}}
+				else{
+					System.out.println("Entered number greater than total dish");
+				}
+				break;
+			default:
+				throw new AssertionError();
+		}}
 	}
 }
