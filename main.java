@@ -4,9 +4,10 @@ public class main{
         Scanner sc=new Scanner(System.in);
         System.out.println("hi");
         int n=sc.nextInt();
+        n++;
         System.out.print(n);
+        
 
-        sc.close();
 
     }
 }
