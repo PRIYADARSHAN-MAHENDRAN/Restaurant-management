@@ -4,10 +4,11 @@ public class Main
 	 
 	static  String userPass[][]=new String[3][2];
 	static  String listDish[][]=new String[10][2];
+	static int totalDishadded=0;
     	public static void main(String[] args) {
         
-	    userPass[0][0]="MUTHU";
-	    userPass[0][1]="qwerty";
+	    userPass[0][0]="muthu";
+	    userPass[0][1]="sudir";
 	    Scanner sc=new Scanner(System.in);
 		int Continuerun=0;
 		while (Continuerun==0) { 
@@ -16,6 +17,7 @@ public class Main
 	    System.out.println("2.Signup");
 		System.out.println("0.Exit");
 	    int choice=sc.nextInt();
+		System.out.println();
 	    switch (choice){
 	        case 1:
 			LoginPg();
@@ -48,7 +50,8 @@ public class Main
 			String password=sc.next();
 			for(int i=0;i<userPass.length;i++){
 				if(username.equals(userPass[i][0]) && password.equals(userPass[i][1])){
-					System.out.println("LOGIN SUCCESSFULLY");
+					System.out.println();
+					System.out.println("`````` LOGIN SUCCESSFULLY ``````");
 					System.out.println();
 					MainMenu();
 					return;
@@ -99,42 +102,68 @@ public class Main
 		Scanner sc=new Scanner(System.in);
 		int Continuerun=1;
 		while(Continuerun==1){
+			System.out.println();
 		System.out.println("1.List of dish");
 		System.out.println("2.Add dish");
 		System.out.println("3.Bill");
 		System.out.println("4.Total sells");
+		System.out.println("0.Logout");
 		int choice=sc.nextInt();
-		
+		System.out.println();
+		System.out.println();
 		switch (choice) {
 			case 1:
+			System.out.println("~~~~~ Dish in menu ~~~~~");
+			System.err.println();
 				for(int i=0;i<listDish.length;i++){
+					int sno=i+1;
+					System.out.print(sno+". ");
 					for(int j=0;j<2;j++){
 						System.out.print(listDish[i][j]+" ");
 					}
 					System.out.println();
 				}
+				System.out.println();
+				System.out.println();
 				break;
 			case 2:
-				System.out.println("Number dish to add");
+				System.out.println("~~~~~ Add dish to menu ~~~~~");
+				System.out.println();
+				System.out.print("Number of dish to add : ");
 				int Tdish=sc.nextInt();
-				if(Tdish<listDish.length){
-				for(int i=0;i<Tdish;i++){
+				System.out.println();
+				Tdish+=totalDishadded;
+				if(Tdish<=listDish.length){
+				for(int i=totalDishadded;i<Tdish;i++){
 					for(int j=0;j<2;j++){
+						int sno=i+1;
 						if(j==0){
-							System.out.println("Dish name "+i+": ");
+							System.out.println("Dish name "+sno+": ");
 						}
 						else{
-							System.out.println("Dish price "+i+": ");
+							System.out.println("Dish price "+sno+": ");
 						}
 						listDish[i][j]=sc.next();
 					}
-				}}
+				}
+				System.out.println();
+				System.out.println("`````` Dish are added to menu `````");
+				System.out.println();
+				totalDishadded+=Tdish;
+			}
 				else{
-					System.out.println("Entered number greater than total dish");
+					System.err.println();
+					System.out.println("````` Entered number is greater than total dish menu `````");
+					System.err.println();
 				}
 				break;
-			default:
-				throw new AssertionError();
-		}}
+			
+				case 0:
+			return;
+				default:
+				System.err.println("````` Enter correct memu again `````");
+				System.out.println();
+		}
 	}
+}
 }
