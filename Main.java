@@ -210,19 +210,28 @@ public class Main {
         int Continuerun = 1;
         while (Continuerun == 1) {
             System.out.println();
-            System.out.println("Choose Table number:");
+            System.out.println("Select Table number (0-4):");
             System.out.println("Enter 0 to go back");
             int  TableNumber= sc.nextInt();
             System.out.println();
             System.out.println();
+            if (TableNumber<0||TableNumber>4) {
+                System.out.println();
+                System.err.println("````` Enter correct table number again `````");
+                    System.out.println();
+                continue;
+            }
             if (TableNumber==0) {
                 break;
             }
+            int Continuerun1 = 1;
+            while (Continuerun1==1) { 
             System.out.println();
             System.out.println("1.Add dish");
             System.out.println("2.Orded dish");
             System.out.println("3.Cancel dish");
             System.out.println("4.Print bill");
+            System.out.println("0.Back");
             int choice=sc.nextInt();
             switch (choice) {
                 case 1:
@@ -277,10 +286,13 @@ public class Main {
                 TotalDishdelivered=TotalDishdelivered+Totaldishorder;
 
                 break;
+                case 0:
+                Continuerun1++;
+                break;
                 default:
                 System.err.println("````` Enter correct memu again `````");
                 System.out.println();
-            }
+            }}
         }
     }
 }
