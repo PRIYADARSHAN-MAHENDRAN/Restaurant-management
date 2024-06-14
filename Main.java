@@ -7,6 +7,9 @@ public class Main {
     static Object listDish[][] = new Object[10][2];
     static Object table[][][] = new Object[5][10][2];
     static int totalDishadded = 0;
+    static int Totalsell = 0;
+    static int TotalDishdelivered = 0;
+
 
     public static void main(String[] args) {
 
@@ -113,7 +116,7 @@ public class Main {
             System.out.println("1.List of dish");
             System.out.println("2.Add dish");
             System.out.println("3.Bill");
-            System.out.println("4.Total sells");
+            System.out.println("4.Analyse");
             System.out.println("0.Logout");
             int choice = sc.nextInt();
             System.out.println();
@@ -123,12 +126,13 @@ public class Main {
                     System.out.println("~~~~~ Dish in menu ~~~~~");
                     System.err.println();
                     for (int i = 0; i < listDish.length; i++) {
+                        if(listDish[i][0]!=null){
                         int sno = i + 1;
                         System.out.print(sno + ". ");
                         for (int j = 0; j < 2; j++) {
                             System.out.print(listDish[i][j] + " ");
                         }
-                        System.out.println();
+                        }System.out.println();
                     }
                     System.out.println();
                     System.out.println();
@@ -186,6 +190,11 @@ public class Main {
                 case 3:
                     bill();
                     break;
+                case 4:
+                System.out.println("Total sell : "+Totalsell);
+                System.out.println("Total dish delivered : "+TotalDishdelivered);
+
+                break;
                 case 0:
                     return;
                 default:
@@ -222,17 +231,24 @@ public class Main {
                     System.out.println((i+1)+". "+listDish[i][0]+" "+listDish[i][1]);
                 }
                     System.out.print("Enter number of dish to order : ");
-                    int Totaldishorder=sc.nextInt();
-                    for (int i = 0; i < Totaldishorder; i++) {
+                    int Totaldishorderintable=sc.nextInt();
+                    for (int i = 0; i < Totaldishorderintable; i++) {
                         System.out.println("Enter dish number : ");
                         int DishNum=sc.nextInt();
                         DishNum--;
+                        while(DishNum>totalDishadded){
+                            System.out.println("````` Enter correct dish number in list `````");
+                            DishNum=sc.nextInt();
+                            DishNum--;
+                        }
                         table[TableNumber][i][0]=listDish[DishNum][0];
                         table[TableNumber][i][1]=listDish[DishNum][1];
                     }
                     break;
                 case 2:
+                System.out.println();
                 for (int i = 0; i < 10; i++) {
+                    if(table[TableNumber][i][1]!=null)
                     System.out.println((i+1)+". "+table[TableNumber][i][0]+" "+table[TableNumber][i][1]);
                 }
                 break;
@@ -240,6 +256,25 @@ public class Main {
 
                 break;
                 case 4:
+                int totalprice=0;
+                System.out.println();
+                int Totaldishorder=0;
+                for (int i = 0; i < 10; i++) {
+                    if(table[TableNumber][i][1]!=null){
+                        Totaldishorder++;
+                    System.out.println((i+1)+". "+table[TableNumber][i][0]+" "+table[TableNumber][i][1]);}
+                    totalprice=table[TableNumber][i][1]!=null?totalprice+((int)table[TableNumber][i][1]):totalprice;
+                    
+                }
+
+                System.out.println("Total dish : "+Totaldishorder);
+                System.out.println("Total price : "+totalprice);
+                for (int i = 0; i < 10; i++) {
+                    table[TableNumber][i][0]=null;//clear value
+                    table[TableNumber][i][1]=null;//clear value
+                }
+                Totalsell=Totalsell+totalprice;
+                TotalDishdelivered=TotalDishdelivered+Totaldishorder;
 
                 break;
                 default:
