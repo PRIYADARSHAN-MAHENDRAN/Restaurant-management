@@ -10,7 +10,6 @@ public class Main {
     static int Totalsell = 0;
     static int TotalDishdelivered = 0;
 
-
     public static void main(String[] args) {
 
         userPass[0][0] = "123";
@@ -103,9 +102,7 @@ public class Main {
         System.out.println("Number of admin account are full");
         System.out.println();
         System.out.println();
-		
 
-		
     }
 
     static void MainMenu() {
@@ -126,13 +123,14 @@ public class Main {
                     System.out.println("~~~~~ Dish in menu ~~~~~");
                     System.err.println();
                     for (int i = 0; i < listDish.length; i++) {
-                        if(listDish[i][0]!=null){
-                        int sno = i + 1;
-                        System.out.print(sno + ". ");
-                        for (int j = 0; j < 2; j++) {
-                            System.out.print(listDish[i][j] + " ");
+                        if (listDish[i][0] != null) {
+                            int sno = i + 1;
+                            System.out.print(sno + ". ");
+                            for (int j = 0; j < 2; j++) {
+                                System.out.print(listDish[i][j] + " ");
+                            }
                         }
-                        }System.out.println();
+                        System.out.println();
                     }
                     System.out.println();
                     System.out.println();
@@ -156,20 +154,20 @@ public class Main {
                                     Integer inputNumber = null;
                                     boolean validInput = false;
                                     while (!validInput) {
-										System.out.println("Dish price " + sno + ": ");
-										String input = sc.next();
-										if (input.isEmpty()) {
-											System.out.println();
-											System.out.println("````` Error: Please enter a number only ``````");
-											System.out.println();
+                                        System.out.println("Dish price " + sno + ": ");
+                                        String input = sc.next();
+                                        if (input.isEmpty()) {
+                                            System.out.println();
+                                            System.out.println("````` Error: Please enter a number only ``````");
+                                            System.out.println();
                                         } else {
                                             try {
                                                 inputNumber = Integer.parseInt(input);
                                                 validInput = true;
-											} catch (NumberFormatException e) {
-												System.out.println();
+                                            } catch (NumberFormatException e) {
+                                                System.out.println();
                                                 System.out.println("`````` Error: Please enter a number only ``````");
-												System.out.println();
+                                                System.out.println();
                                             }
                                         }
                                     }
@@ -191,10 +189,10 @@ public class Main {
                     bill();
                     break;
                 case 4:
-                System.out.println("Total sell : "+Totalsell);
-                System.out.println("Total dish delivered : "+TotalDishdelivered);
+                    System.out.println("Total sell : " + Totalsell);
+                    System.out.println("Total dish delivered : " + TotalDishdelivered);
 
-                break;
+                    break;
                 case 0:
                     return;
                 default:
@@ -206,93 +204,96 @@ public class Main {
 
     static void bill() {
         Scanner sc = new Scanner(System.in);
-        
+
         int Continuerun = 1;
         while (Continuerun == 1) {
             System.out.println();
             System.out.println("Select Table number (0-4):");
             System.out.println("Enter 0 to go back");
-            int  TableNumber= sc.nextInt();
+            int TableNumber = sc.nextInt();
             System.out.println();
             System.out.println();
-            if (TableNumber<0||TableNumber>4) {
+            if (TableNumber < 0 || TableNumber > 4) {
                 System.out.println();
                 System.err.println("````` Enter correct table number again `````");
-                    System.out.println();
+                System.out.println();
                 continue;
             }
-            if (TableNumber==0) {
+            if (TableNumber == 0) {
                 break;
             }
             int Continuerun1 = 1;
-            while (Continuerun1==1) { 
-            System.out.println();
-            System.out.println("1.Add dish");
-            System.out.println("2.Orded dish");
-            System.out.println("3.Cancel dish");
-            System.out.println("4.Print bill");
-            System.out.println("0.Back");
-            int choice=sc.nextInt();
-            switch (choice) {
-                case 1:
-                System.out.println("List of dish available");
-                for (int i = 0; i < totalDishadded; i++) {
-                    System.out.println((i+1)+". "+listDish[i][0]+" "+listDish[i][1]);
-                }
-                    System.out.print("Enter number of dish to order : ");
-                    int Totaldishorderintable=sc.nextInt();
-                    for (int i = 0; i < Totaldishorderintable; i++) {
-                        System.out.println("Enter dish number : ");
-                        int DishNum=sc.nextInt();
-                        DishNum--;
-                        while(DishNum>totalDishadded){
-                            System.out.println("````` Enter correct dish number in list `````");
-                            DishNum=sc.nextInt();
-                            DishNum--;
+            while (Continuerun1 == 1) {
+                System.out.println();
+                System.out.println("1.Add dish");
+                System.out.println("2.Orded dish");
+                System.out.println("3.Cancel dish");
+                System.out.println("4.Print bill");
+                System.out.println("0.Back");
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 1:
+                        System.out.println("List of dish available");
+                        for (int i = 0; i < totalDishadded; i++) {
+                            System.out.println((i + 1) + ". " + listDish[i][0] + " " + listDish[i][1]);
                         }
-                        table[TableNumber][i][0]=listDish[DishNum][0];
-                        table[TableNumber][i][1]=listDish[DishNum][1];
-                    }
-                    break;
-                case 2:
-                System.out.println();
-                for (int i = 0; i < 10; i++) {
-                    if(table[TableNumber][i][1]!=null)
-                    System.out.println((i+1)+". "+table[TableNumber][i][0]+" "+table[TableNumber][i][1]);
-                }
-                break;
-                case 3:
+                        System.out.print("Enter number of dish to order : ");
+                        int Totaldishorderintable = sc.nextInt();
+                        for (int i = 0; i < Totaldishorderintable; i++) {
+                            System.out.println("Enter dish number : ");
+                            int DishNum = sc.nextInt();
+                            DishNum--;
+                            while (DishNum > totalDishadded) {
+                                System.out.println("````` Enter correct dish number in list `````");
+                                DishNum = sc.nextInt();
+                                DishNum--;
+                            }
+                            table[TableNumber][i][0] = listDish[DishNum][0];
+                            table[TableNumber][i][1] = listDish[DishNum][1];
+                        }
+                        break;
+                    case 2:
+                        System.out.println();
+                        for (int i = 0; i < 10; i++) {
+                            if (table[TableNumber][i][1] != null) {
+                                System.out.println((i + 1) + ". " + table[TableNumber][i][0] + " " + table[TableNumber][i][1]);
+                            }
+                        }
+                        break;
+                    case 3:
 
-                break;
-                case 4:
-                int totalprice=0;
-                System.out.println();
-                int Totaldishorder=0;
-                for (int i = 0; i < 10; i++) {
-                    if(table[TableNumber][i][1]!=null){
-                        Totaldishorder++;
-                    System.out.println((i+1)+". "+table[TableNumber][i][0]+" "+table[TableNumber][i][1]);}
-                    totalprice=table[TableNumber][i][1]!=null?totalprice+((int)table[TableNumber][i][1]):totalprice;
-                    
-                }
+                        break;
+                    case 4:
+                        int totalprice = 0;
+                        System.out.println();
+                        int Totaldishorder = 0;
+                        for (int i = 0; i < 10; i++) {
+                            if (table[TableNumber][i][1] != null) {
+                                Totaldishorder++;
+                                System.out.println((i + 1) + ". " + table[TableNumber][i][0] + " " + table[TableNumber][i][1]);
+                            }
+                            totalprice = table[TableNumber][i][1] != null ? totalprice + ((int) table[TableNumber][i][1]) : totalprice;
 
-                System.out.println("Total dish : "+Totaldishorder);
-                System.out.println("Total price : "+totalprice);
-                for (int i = 0; i < 10; i++) {
-                    table[TableNumber][i][0]=null;//clear value
-                    table[TableNumber][i][1]=null;//clear value
-                }
-                Totalsell=Totalsell+totalprice;
-                TotalDishdelivered=TotalDishdelivered+Totaldishorder;
+                        }
 
-                break;
-                case 0:
-                Continuerun1++;
-                break;
-                default:
-                System.err.println("````` Enter correct memu again `````");
-                System.out.println();
-            }}
+                        System.out.println("Total dish : " + Totaldishorder);
+                        System.out.println("Total price : " + totalprice);
+                        for (int i = 0; i < 10; i++) {
+                            table[TableNumber][i][0] = null;//clear value
+                            table[TableNumber][i][1] = null;//clear value
+                        }
+                        Totalsell = Totalsell + totalprice;
+                        TotalDishdelivered = TotalDishdelivered + Totaldishorder;
+
+                        break;
+                    case 0:
+                        Continuerun1++;
+                        break;
+                    default:
+                        System.err.println("````` Enter correct memu again `````");
+                        System.out.println();
+                }
+            }
         }
     }
 }
