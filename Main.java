@@ -5,12 +5,13 @@ public class Main {
 
     static String userPass[][] = new String[3][2];
     static Object listDish[][] = new Object[10][2];
+    static Object table[][][] = new Object[5][10][2];
     static int totalDishadded = 0;
 
     public static void main(String[] args) {
 
-        userPass[0][0] = "muthu";
-        userPass[0][1] = "sudir";
+        userPass[0][0] = "123";
+        userPass[0][1] = "123";
         Scanner sc = new Scanner(System.in);
         int Continuerun = 0;
         while (Continuerun == 0) {
@@ -196,29 +197,54 @@ public class Main {
 
     static void bill() {
         Scanner sc = new Scanner(System.in);
+        
         int Continuerun = 1;
         while (Continuerun == 1) {
             System.out.println();
-            System.out.println("1.Table");
-            System.out.println("0.Back");
-            int choice = sc.nextInt();
+            System.out.println("Choose Table number:");
+            System.out.println("Enter 0 to go back");
+            int  TableNumber= sc.nextInt();
             System.out.println();
             System.out.println();
+            if (TableNumber==0) {
+                break;
+            }
+            System.out.println();
+            System.out.println("1.Add dish");
+            System.out.println("2.Orded dish");
+            System.out.println("3.Cancel dish");
+            System.out.println("4.Print bill");
+            int choice=sc.nextInt();
             switch (choice) {
                 case 1:
-				
+                System.out.println("List of dish available");
+                for (int i = 0; i < totalDishadded; i++) {
+                    System.out.println((i+1)+". "+listDish[i][0]+" "+listDish[i][1]);
+                }
+                    System.out.print("Enter number of dish to order : ");
+                    int Totaldishorder=sc.nextInt();
+                    for (int i = 0; i < Totaldishorder; i++) {
+                        System.out.println("Enter dish number : ");
+                        int DishNum=sc.nextInt();
+                        DishNum--;
+                        table[TableNumber][i][0]=listDish[DishNum][0];
+                        table[TableNumber][i][1]=listDish[DishNum][1];
+                    }
                     break;
                 case 2:
-
-                    break;
+                for (int i = 0; i < 10; i++) {
+                    System.out.println((i+1)+". "+table[TableNumber][i][0]+" "+table[TableNumber][i][1]);
+                }
+                break;
                 case 3:
 
-                    break;
-                case 0:
-                    return;
+                break;
+                case 4:
+
+                break;
                 default:
-                    System.err.println("````` Enter correct memu again `````");
-                    System.out.println();
+                System.err.println("````` Enter correct memu again `````");
+                System.out.println();
             }
         }
     }
