@@ -1,16 +1,21 @@
 
-import java.util.Scanner;
+import java.time.LocalTime;
+import java.util.*;
 
 public class Main {
 
     static String userPass[][] = new String[3][2];
     static Object listDish[][] = new Object[10][2];
-    static Object table[][][] = new Object[5][10][2];
+    static Object table[][][] = new Object[5][10][3];
     static int totalDishadded = 0;
     static int Totalsell = 0;
     static int TotalDishdelivered = 0;
-
+    static Calendar timer= Calendar.getInstance();
     public static void main(String[] args) {
+        homepg();
+    }
+
+    static void homepg() {
 
         userPass[0][0] = "123";
         userPass[0][1] = "123";
@@ -21,7 +26,13 @@ public class Main {
             System.out.println("1.Login");
             System.out.println("2.Signup");
             System.out.println("0.Exit");
-            int choice = sc.nextInt();
+            int choice=0;
+            try {
+                 choice = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("````` ERROR: Enter available menu number only `````");
+                homepg();
+            }
             System.out.println();
             switch (choice) {
                 case 1:
@@ -111,11 +122,17 @@ public class Main {
         while (Continuerun == 1) {
             System.out.println();
             System.out.println("1.List of dish");
-            System.out.println("2.Add dish");
+            System.out.println("2.Add today's dish");
             System.out.println("3.Bill");
             System.out.println("4.Analyse");
             System.out.println("0.Logout");
-            int choice = sc.nextInt();
+            int choice = 0;
+            try {
+                choice = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("````` ERROR: Enter available menu number only `````");
+                MainMenu();
+            }
             System.out.println();
             System.out.println();
             switch (choice) {
@@ -250,7 +267,11 @@ public class Main {
                             }
                             table[TableNumber][i][0] = listDish[DishNum][0];
                             table[TableNumber][i][1] = listDish[DishNum][1];
+                            LocalTime currentTime = LocalTime.now();
+                            LocalTime futureTime = currentTime.plusSeconds(45);
+                            table[TableNumber][i][2] = futureTime;
                         }
+
                         break;
                     case 2:
                         System.out.println();
@@ -261,8 +282,52 @@ public class Main {
                         }
                         break;
                     case 3:
+                    
+                        int dishorder = 0;
+                        int count = 0;
+                        System.out.println("List of dish orded : ");
+                            for (int i = 0; i < 10; i++) {
+                                if (table[TableNumber][i][1] != null) {
+                                    System.out.println((i + 1) + ". " + table[TableNumber][i][0] + " " + table[TableNumber][i][1]);
+                                    dishorder++;
+                                }
+                            }
+                        System.out.println("~~~ Dish to cancel ~~~");
+                        while (count <= dishorder) {
+                            
+                            System.out.println();
+                            System.out.println("Enter dish number : ");
+                            System.out.println("Enter 0 to go back");
+                            int DishNumtocancel = sc.nextInt();
 
-                        break;
+                            if (DishNumtocancel == 0) {
+                                break;
+                            }
+                            DishNumtocancel--;
+                            LocalTime currentTimeAfterWait = LocalTime.now();
+                            LocalTime storedFutureTime = (LocalTime) table[TableNumber][DishNumtocancel][2];
+                            System.out.println("storedFutureTime=" + storedFutureTime);
+                            System.out.println("currentTimeAfterWait=" + currentTimeAfterWait);
+
+                            if (currentTimeAfterWait.isAfter(storedFutureTime)) {
+                                System.out.println("````` You cannot cancel this dish because dish is orded before 30 seconds `````");
+                            } else {
+                                System.out.println("Orded "+table[TableNumber][DishNumtocancel][0]+" is canceled");
+                                table[TableNumber][DishNumtocancel][0] = null;
+                                table[TableNumber][DishNumtocancel][1] = null;
+                                table[TableNumber][DishNumtocancel][2] = null;
+
+                            }
+                            count++;
+                            System.out.println("List of dish orded : ");
+                            for (int i = 0; i < 10; i++) {
+                                if (table[TableNumber][i][1] != null) {
+                                    System.out.println((i + 1) + ". " + table[TableNumber][i][0] + " " + table[TableNumber][i][1]);
+                                    
+                                }
+                            }
+
+                        }break;
                     case 4:
                         int totalprice = 0;
                         System.out.println();
@@ -284,7 +349,6 @@ public class Main {
                         }
                         Totalsell = Totalsell + totalprice;
                         TotalDishdelivered = TotalDishdelivered + Totaldishorder;
-
                         break;
                     case 0:
                         Continuerun1++;
