@@ -227,7 +227,13 @@ public class Main {
             System.out.println();
             System.out.println("Select Table number (0-4):");
             System.out.println("Enter 0 to go back");
-            int TableNumber = sc.nextInt();
+            int TableNumber = 0;
+            try {
+                TableNumber = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("````` ERROR: Enter available table number only (or) 0 for go back `````");
+                bill();
+            }
             System.out.println();
             System.out.println();
             if (TableNumber < 0 || TableNumber > 4) {
