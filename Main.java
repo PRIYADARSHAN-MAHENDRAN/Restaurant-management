@@ -22,7 +22,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int Continuerun = 0;
         while (Continuerun == 0) {
-            System.out.println("~~~~~~~~~~ Restaurant Management ~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~ Restaurant Management ~~~~~~~~~~");//   home page
             System.out.println("1.Login");
             System.out.println("2.Signup");
             System.out.println("0.Exit");
@@ -121,7 +121,7 @@ public class Main {
         int Continuerun = 1;
         while (Continuerun == 1) {
             System.out.println();
-            System.out.println("1.List of dish");
+            System.out.println("1.List of dish today available");
             System.out.println("2.Add today's dish");
             System.out.println("3.Bill");
             System.out.println("4.Analyse");
@@ -198,7 +198,7 @@ public class Main {
                         totalDishadded += Tdish;
                     } else {
                         System.err.println();
-                        System.out.println("````` Entered number is greater than total dish menu `````");
+                        System.out.println("````` Entered number is greater than total dishes can added to menu `````");
                         System.err.println();
                     }
                     break;
